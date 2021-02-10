@@ -38,4 +38,4 @@ Vault Application
 (length, includes symbols, numbers etc.)
 - As a user, I want to be able to save the random generated password in my saved list
 - As a user, I want to be able to check the strength of my password, and see a 
-"warning" to change my password if it's too weak
+"warning" to change my password if it's too weak 
