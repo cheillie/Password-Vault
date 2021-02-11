@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+// Represents a user with different accounts saved and a login pin
+
 public class User {
     private List<Account> accountList;
     private int login;
@@ -12,6 +14,11 @@ public class User {
     public User(int login) {
         accountList = new ArrayList<>();
         this.login = login;
+    }
+
+    // EFFECTS: returns the account list
+    public List<Account> getAccountList() {
+        return accountList;
     }
 
     // MODIFIES: this
@@ -43,4 +50,5 @@ public class User {
     public boolean contains(Account account) {
         return accountList.contains(account);
     }
+
 }

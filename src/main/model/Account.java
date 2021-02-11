@@ -3,6 +3,8 @@ package model;
 // Represents an account with password, username, email, link, and notes
 public class Account {
 
+    private static int nextAccountId = 1;
+    private int id;
     private String password;
     private String username;
     private String email;
@@ -12,10 +14,16 @@ public class Account {
     // REQUIRES: password, username, email, notes are all non-empty strings
     // EFFECTS: constructs an account with password, username, email, and notes
     public Account(String website, String password, String username, String email) {
+        this.id = nextAccountId++;
         this.password = password;
         this.username = username;
         this.email = email;
         this.website = website;
+    }
+
+    // EFFECTS: return the account position in the list, 1 being the first position
+    public int getID() {
+        return id;
     }
 
     // EFFECTS: return the account website
@@ -36,6 +44,12 @@ public class Account {
     // EFFECTS: return the account email
     public String getEmail() {
         return email;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: set the account position
+    public void setId(int i) {
+        id = i;
     }
 
     // MODIFIES: this
