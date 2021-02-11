@@ -22,7 +22,7 @@ public class Account {
     }
 
     // EFFECTS: return the account position in the list, 1 being the first position
-    public int getID() {
+    public int getId() {
         return id;
     }
 

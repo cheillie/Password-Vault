@@ -14,6 +14,12 @@ class AccountTest {
     }
 
     @Test
+    public void testGetID() {
+        testAccount.setId(1);
+        assertEquals(1,testAccount.getId());
+    }
+
+    @Test
     public void testGetWebsite() {
         assertEquals("facebook", testAccount.getWebsite());
     }
@@ -31,6 +37,12 @@ class AccountTest {
     @Test
     public void testGetEmail() {
         assertEquals("cherry@gmail.com", testAccount.getEmail());
+    }
+
+    @Test
+    public void testSetId() {
+        testAccount.setId(1);
+        assertEquals(1, testAccount.getId());
     }
 
     @Test

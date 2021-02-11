@@ -16,6 +16,14 @@ public class UserTest {
     }
 
     @Test
+    public void testGetAccountList() {
+        assertFalse(testUser.getAccountList().contains(testAccount));
+        testUser.addAccount(testAccount);
+
+        assertTrue(testUser.getAccountList().contains(testAccount));
+    }
+
+    @Test
     public void testAddAccount() {
         testUser.addAccount(testAccount);
         assertEquals(1, testUser.size());

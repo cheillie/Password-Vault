@@ -121,7 +121,8 @@ public class PasswordVault {
         System.out.println("\t1 -> add account");
         System.out.println("\t2 -> edit account");
         System.out.println("\t3 -> delete account");
-        System.out.println("\t4 -> view account(s)");
+        System.out.println("\t4 -> view account(s) detail");
+        System.out.println("\t5 -> view all");
         System.out.println("\tq -> quit");
     }
 
@@ -137,6 +138,8 @@ public class PasswordVault {
             deleteAccount();
         } else if (command.equals("4")) {
             viewAccount();
+        } else if (command.equals("5")) {
+            viewAll();
         } else if (command.equals("r")) {
             cheat();
         } else {
@@ -145,7 +148,12 @@ public class PasswordVault {
     }
 
     private void cheat() {
-
+        Account account1 = new Account("fb", "123", "cherry", "gmail");
+        Account account2 = new Account("ig", "3321", "leo", "hotmail");
+        Account account3 = new Account("vsco", "1111", "brandon", "qq.com");
+        user.addAccount(account1);
+        user.addAccount(account2);
+        user.addAccount(account3);
     }
 
     // MODIFIES: this
@@ -175,7 +183,7 @@ public class PasswordVault {
             System.out.println("Enter the account ID you wish to edit:");
 
             for (Account a : user.getAccountList()) {
-                if (a.getID() == Integer.parseInt(input.next())) {    // !!! fix so that it takes in numbers only
+                if (a.getId() == Integer.parseInt(input.next())) {    // !!! fix so that it takes in numbers only
                     printInfo(a);
                     editAccount(a);
                 } else {
@@ -258,34 +266,42 @@ public class PasswordVault {
     // MODIFIES: this
     // EFFECTS: allow users to delete existing accounts
     private void deleteAccount() {
+        boolean b = true;
         if (viewAll()) {
             System.out.println("Enter the account ID you wish to delete");
+            String s = input.next();
 
             for (Account a : user.getAccountList()) {
-                if (a.getID() == Integer.parseInt(input.next())) {
-                    printInfo(a);
+                if (a.getId() == Integer.parseInt(s)) {
                     user.removeAccount(a);
                     System.out.println("Account has been removed successfully!");
+                    b = false;
                     break;
                 }
             }
-            System.out.println("Cannot find account ID");
+            if (b) {
+                System.out.println("Cannot find account ID");
+            }
         }
     }
 
 
     // EFFECTS: allow users to view a particular account in detail
     private void viewAccount() {
+        boolean b = true;
         if (viewAll()) {
-            String s = input.next();
             System.out.println("Enter the ID you wish to view");
+            String s = input.next();
             for (Account a : user.getAccountList()) {
-                if (a.getID() == Integer.parseInt(s)) {
+                if (a.getId() == Integer.parseInt(s)) {
                     printInfo(a);
+                    b = false;
                     break;
                 }
             }
-            System.out.println("Cannot find account ID");
+            if (b) {
+                System.out.println("Cannot find account ID");
+            }
         }
     }
 
@@ -296,7 +312,7 @@ public class PasswordVault {
             return false;
         } else {
             for (Account a : user.getAccountList()) {
-                System.out.println("ID:" + a.getID());
+                System.out.println("ID:" + a.getId());
                 System.out.println("WEBSITE:" + a.getWebsite());
                 System.out.println("PASSWORD:" + a.getPassword());
                 System.out.println("---------------------");
