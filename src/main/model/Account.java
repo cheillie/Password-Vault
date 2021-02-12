@@ -1,6 +1,6 @@
 package model;
 
-// Represents an account with password, username, email, link, and notes
+// Represents an account with a website, password, username, and email
 public class Account {
 
     private static int nextAccountId = 1;
@@ -11,8 +11,7 @@ public class Account {
     private String website;
 
 
-    // REQUIRES: password, username, email, notes are all non-empty strings
-    // EFFECTS: constructs an account with password, username, email, and notes
+    // EFFECTS: constructs an account with an ID, password, username, email, and notes
     public Account(String website, String password, String username, String email) {
         this.id = nextAccountId++;
         this.password = password;
@@ -21,57 +20,57 @@ public class Account {
         this.website = website;
     }
 
-    // EFFECTS: return the account position in the list, 1 being the first position
+    // EFFECTS: returns the account position in the list, 1 being the first position
     public int getId() {
         return id;
     }
 
-    // EFFECTS: return the account website
+    // EFFECTS: returns the account website
     public String getWebsite() {
         return website;
     }
 
-    // EFFECTS: return the account password
+    // EFFECTS: returns the account password
     public String getPassword() {
         return password;
     }
 
-    // EFFECTS: return the account username
+    // EFFECTS: returns the account username
     public String getUsername() {
         return username;
     }
 
-    // EFFECTS: return the account email
+    // EFFECTS: returns the account email
     public String getEmail() {
         return email;
     }
 
     // MODIFIES: this
-    // EFFECTS: set the account position
+    // EFFECTS: sets the account's position
     public void setId(int i) {
         id = i;
     }
 
     // MODIFIES: this
-    // EFFECTS: set the account website
+    // EFFECTS: sets the account's website
     public void setWebsite(String s) {
         website = s;
     }
 
     // MODIFIES: this
-    // EFFECTS: set the account password
+    // EFFECTS: sets the account's password
     public void setPassword(String s) {
         password = s;
     }
 
     // MODIFIES: this
-    // EFFECTS: set the account username
+    // EFFECTS: sets the account's username
     public void setUsername(String s) {
         username = s;
     }
 
     // MODIFIES: this
-    // EFFECTS: set the account email
+    // EFFECTS: sets the account's email
     public void setEmail(String s) {
         email = s;
     }

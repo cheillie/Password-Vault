@@ -5,6 +5,8 @@ import model.User;
 
 import java.util.Scanner;
 
+// Password Vault application
+
 public class PasswordVault {
 
     private int login;
@@ -42,7 +44,7 @@ public class PasswordVault {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates a while loop for the login page
+    // EFFECTS: creates a loop for the login page
     public void loginLoop() {
         String command = null;
 
@@ -60,7 +62,7 @@ public class PasswordVault {
         }
     }
 
-    // EFFECTS: creates a new user with a login password
+    // EFFECTS: displays menu of options to user
     private void loginMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\t1 -> Create your password");
@@ -86,6 +88,7 @@ public class PasswordVault {
         user = new User(createLogin());
     }
 
+    // MODIFIES: this
     // EFFECTS: crates a login password in the login menu page
     private int createLogin() {
         Scanner input = new Scanner(System.in);
@@ -101,7 +104,7 @@ public class PasswordVault {
         return Integer.parseInt(s);
     }
 
-    // EFFECTS:
+    // EFFECTS: checks if the given login is 4 digit numbers only
     private boolean isValidLogin(String input) {
         if (input.length() != 4) {
             return false;
@@ -114,14 +117,13 @@ public class PasswordVault {
         return true;
     }
 
-
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\t1 -> add account");
         System.out.println("\t2 -> edit account");
         System.out.println("\t3 -> delete account");
-        System.out.println("\t4 -> view account(s) detail");
+        System.out.println("\t4 -> view account detail");
         System.out.println("\t5 -> view all");
         System.out.println("\tq -> quit");
     }
@@ -133,7 +135,7 @@ public class PasswordVault {
             saveAccount();
         } else if (command.equals("2")) {
             stillRunning = true;
-            editAccountOption();
+            editAccountChooseId();
         } else if (command.equals("3")) {
             deleteAccount();
         } else if (command.equals("4")) {
@@ -157,7 +159,7 @@ public class PasswordVault {
     }
 
     // MODIFIES: this
-    // EFFECTS: allows user to save an account
+    // EFFECTS: allows user to save an Account
     private void saveAccount() {
         System.out.println("Enter website:");
         String website = input.next();
@@ -177,15 +179,16 @@ public class PasswordVault {
         System.out.println("Account saved successfully!");
     }
 
-    // EFFECTS: allow users to edit existing accounts
-    private void editAccountOption() {
+    // MODIFIES: this                   // !!! does it modify?
+    // EFFECTS: allows users to choose the Account they want to edit
+    private void editAccountChooseId() {
         if (viewAll()) {
             System.out.println("Enter the account ID you wish to edit:");
 
             for (Account a : user.getAccountList()) {
                 if (a.getId() == Integer.parseInt(input.next())) {    // !!! fix so that it takes in numbers only
                     printInfo(a);
-                    editAccount(a);
+                    editAccountMenu(a);
                 } else {
                     System.out.println("Cannot find account ID");
                 }
@@ -193,8 +196,20 @@ public class PasswordVault {
         }
     }
 
-    // EFFECTS:
-    private void editAccount(Account a) {
+//    private boolean isValidLogin(String input) {
+//        if (input.length() != 4) {
+//            return false;
+//        }
+//        try {
+//            Integer i = Integer.parseInt(input);
+//        } catch (Exception e) {
+//            return false;
+//        }
+//        return true;
+//    }
+
+    // EFFECTS: displays menu of options to user
+    private void editAccountMenu(Account a) {
         while (stillRunning) {
             System.out.println("\nSelect from:");
             System.out.println("\t1 -> Edit Website");
@@ -210,7 +225,7 @@ public class PasswordVault {
     }
 
     // MODIFIES: this
-    // EFFECTS:
+    // EFFECTS: process user command for edit account menu
     private void processEditAccount(String command, Account a) {
         if (command.equals("1")) {
             editWebsite(a);
@@ -228,7 +243,7 @@ public class PasswordVault {
     }
 
     // MODIFIES: this
-    // EFFECTS:
+    // EFFECTS: allows user to edit account website
     private void editWebsite(Account a) {
         System.out.println("Enter new Website:");
         a.setWebsite(input.next());
@@ -237,7 +252,7 @@ public class PasswordVault {
     }
 
     // MODIFIES: this
-    // EFFECTS:
+    // EFFECTS: allows user to edit account password
     private void editPassword(Account a) {
         System.out.println("Enter new Password:");
         a.setPassword(input.next());
@@ -246,7 +261,7 @@ public class PasswordVault {
     }
 
     // MODIFIES: this
-    // EFFECTS:
+    // EFFECTS: allows user to edit account username
     private void editUsername(Account a) {
         System.out.println("Enter new Username:");
         a.setUsername(input.next());
@@ -255,7 +270,7 @@ public class PasswordVault {
     }
 
     // MODIFIES: this
-    // EFFECTS:
+    // EFFECTS: allows user to edit account email
     private void editEmail(Account a) {
         System.out.println("Enter new Email:");
         a.setEmail(input.next());
@@ -264,7 +279,7 @@ public class PasswordVault {
     }
 
     // MODIFIES: this
-    // EFFECTS: allow users to delete existing accounts
+    // EFFECTS: allows users to delete existing accounts
     private void deleteAccount() {
         boolean b = true;
         if (viewAll()) {
@@ -285,8 +300,8 @@ public class PasswordVault {
         }
     }
 
-
-    // EFFECTS: allow users to view a particular account in detail
+    // !!! does this modify?
+    // EFFECTS: allows users to view a particular account in detail
     private void viewAccount() {
         boolean b = true;
         if (viewAll()) {
@@ -305,7 +320,8 @@ public class PasswordVault {
         }
     }
 
-    // EFFECTS:
+    // !!! does this modify?
+    // EFFECTS: allows user to preview all accounts
     private boolean viewAll() {
         if (user.size() <= 0) {
             System.out.println("You don't have any accounts saved yet!");
@@ -321,6 +337,7 @@ public class PasswordVault {
         }
     }
 
+    // EFFECTS: prints the Account information
     private void printInfo(Account a) {
         System.out.println("WEBSITE:" + a.getWebsite());
         System.out.println("PASSWORD:" + a.getPassword());

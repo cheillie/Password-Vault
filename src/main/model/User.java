@@ -22,14 +22,14 @@ public class User {
     }
 
     // MODIFIES: this
-    // EFFECTS: add an account to account list
+    // EFFECTS: adds an account to account list
     public void addAccount(Account account) {
         accountList.add(account);
     }
 
     // REQUIRES: account list is not empty and account is an element of the account list
     // MODIFIES: this
-    // EFFECTS: remove an account from account list
+    // EFFECTS: removes an account from account list
     public void removeAccount(Account account) {
         accountList.remove(account);
     }
