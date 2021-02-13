@@ -109,6 +109,7 @@ public class PasswordVault {
         if (input.length() != 4) {
             return false;
         }
+        // source: https://www.w3schools.com/java/java_try_catch.asp
         try {
             Integer i = Integer.parseInt(input);
         } catch (Exception e) {
@@ -116,6 +117,7 @@ public class PasswordVault {
         }
         return true;
     }
+
 
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
@@ -188,7 +190,7 @@ public class PasswordVault {
             String s = input.next();
 
             for (Account a : user.getAccountList()) {
-                if (a.getId() == Integer.parseInt(s)) {
+                if (matchIdAndInput(a, s)) {
                     canFind = true;              // !!! fix so that it takes in numbers only
                     printInfo(a);
                     editAccountMenu(a);
@@ -281,7 +283,7 @@ public class PasswordVault {
             String s = input.next();
 
             for (Account a : user.getAccountList()) {
-                if (a.getId() == Integer.parseInt(s)) {
+                if (matchIdAndInput(a, s)) {
                     canFind = true;
                     user.removeAccount(a);
                     System.out.println("Account has been removed successfully!");
@@ -303,7 +305,7 @@ public class PasswordVault {
             System.out.println("Enter the ID you wish to view");
             String s = input.next();
             for (Account a : user.getAccountList()) {
-                if (a.getId() == Integer.parseInt(s)) {
+                if (matchIdAndInput(a, s)) {
                     canFind = true;
                     printInfo(a);
                     break;
@@ -339,6 +341,12 @@ public class PasswordVault {
         System.out.println("USERNAME:" + a.getUsername());
         System.out.println("EMAIL:" + a.getEmail());
         System.out.println("---------------------");
+    }
+
+    // EFFECTS: checks if the account ID is the same as the input s
+    //          and checks if s is an integer
+    private boolean matchIdAndInput(Account a, String s) {
+        return String.valueOf(a.getId()).equals(s);
     }
 
 }
