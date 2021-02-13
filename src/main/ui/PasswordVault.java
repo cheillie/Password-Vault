@@ -182,31 +182,24 @@ public class PasswordVault {
     // MODIFIES: this                   // !!! does it modify?
     // EFFECTS: allows users to choose the Account they want to edit
     private void editAccountChooseId() {
+        boolean canFind = false;
         if (viewAll()) {
             System.out.println("Enter the account ID you wish to edit:");
+            String s = input.next();
 
             for (Account a : user.getAccountList()) {
-                if (a.getId() == Integer.parseInt(input.next())) {    // !!! fix so that it takes in numbers only
+                if (a.getId() == Integer.parseInt(s)) {
+                    canFind = true;              // !!! fix so that it takes in numbers only
                     printInfo(a);
                     editAccountMenu(a);
-                } else {
-                    System.out.println("Cannot find account ID");
+                    break;
                 }
+            }
+            if (!canFind) {
+                System.out.println("Cannot find account ID");
             }
         }
     }
-
-//    private boolean isValidLogin(String input) {
-//        if (input.length() != 4) {
-//            return false;
-//        }
-//        try {
-//            Integer i = Integer.parseInt(input);
-//        } catch (Exception e) {
-//            return false;
-//        }
-//        return true;
-//    }
 
     // EFFECTS: displays menu of options to user
     private void editAccountMenu(Account a) {
@@ -281,20 +274,21 @@ public class PasswordVault {
     // MODIFIES: this
     // EFFECTS: allows users to delete existing accounts
     private void deleteAccount() {
-        boolean b = true;
+        boolean canFind = false;
+
         if (viewAll()) {
             System.out.println("Enter the account ID you wish to delete");
             String s = input.next();
 
             for (Account a : user.getAccountList()) {
                 if (a.getId() == Integer.parseInt(s)) {
+                    canFind = true;
                     user.removeAccount(a);
                     System.out.println("Account has been removed successfully!");
-                    b = false;
                     break;
                 }
             }
-            if (b) {
+            if (!canFind) {
                 System.out.println("Cannot find account ID");
             }
         }
@@ -303,18 +297,19 @@ public class PasswordVault {
     // !!! does this modify?
     // EFFECTS: allows users to view a particular account in detail
     private void viewAccount() {
-        boolean b = true;
+        boolean canFind = false;
+
         if (viewAll()) {
             System.out.println("Enter the ID you wish to view");
             String s = input.next();
             for (Account a : user.getAccountList()) {
                 if (a.getId() == Integer.parseInt(s)) {
+                    canFind = true;
                     printInfo(a);
-                    b = false;
                     break;
                 }
             }
-            if (b) {
+            if (!canFind) {
                 System.out.println("Cannot find account ID");
             }
         }
