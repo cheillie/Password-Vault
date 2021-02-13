@@ -16,7 +16,7 @@ public class PasswordVault {
     private boolean isLogin = true;
     boolean stillRunning = true;
 
-    // EFFECTS: runs the teller application
+    // EFFECTS: runs the Password Vault application
     public PasswordVault() {
         runVault();
     }
@@ -170,7 +170,7 @@ public class PasswordVault {
         System.out.println("Account saved successfully!");
     }
 
-    // MODIFIES: this                   // !!! does it modify?
+    // MODIFIES: this
     // EFFECTS: allows users to choose the Account they want to edit
     private void editAccountChooseId() {
         boolean canFind = false;
@@ -180,7 +180,7 @@ public class PasswordVault {
 
             for (Account a : user.getAccountList()) {
                 if (matchIdAndInput(a, s)) {
-                    canFind = true;              // !!! fix so that it takes in numbers only
+                    canFind = true;
                     printInfo(a);
                     editAccountMenu(a);
                     break;
@@ -192,14 +192,15 @@ public class PasswordVault {
         }
     }
 
-    // EFFECTS: displays menu of options to user
+    // MODIFIES: this
+    // EFFECTS: displays edit menu of options to user
     private void editAccountMenu(Account a) {
         while (stillRunning) {
             System.out.println("\nSelect from:");
-            System.out.println("\t1 -> Edit Website");
-            System.out.println("\t2 -> Edit Password");
-            System.out.println("\t3 -> Edit Username");
-            System.out.println("\t4 -> Edit Email");
+            System.out.println("\t1 -> edit Website");
+            System.out.println("\t2 -> edit Password");
+            System.out.println("\t3 -> edit Username");
+            System.out.println("\t4 -> edit Email");
             System.out.println("\t5 -> back");
 
             String command = input.next();
@@ -231,7 +232,7 @@ public class PasswordVault {
     private void editWebsite(Account a) {
         System.out.println("Enter new Website:");
         a.setWebsite(input.next());
-        System.out.println("Website has been changed successfully!");
+        System.out.println("Website changed successfully!");
         printInfo(a);
     }
 
@@ -240,7 +241,7 @@ public class PasswordVault {
     private void editPassword(Account a) {
         System.out.println("Enter new Password:");
         a.setPassword(input.next());
-        System.out.println("Password has changed successfully!");
+        System.out.println("Password changed successfully!");
         printInfo(a);
     }
 
@@ -249,7 +250,7 @@ public class PasswordVault {
     private void editUsername(Account a) {
         System.out.println("Enter new Username:");
         a.setUsername(input.next());
-        System.out.println("Username has changed successfully!");
+        System.out.println("Username changed successfully!");
         printInfo(a);
     }
 
@@ -258,7 +259,7 @@ public class PasswordVault {
     private void editEmail(Account a) {
         System.out.println("Enter new Email:");
         a.setEmail(input.next());
-        System.out.println("Email has changed successfully!");
+        System.out.println("Email changed successfully!");
         printInfo(a);
     }
 
@@ -275,7 +276,7 @@ public class PasswordVault {
                 if (matchIdAndInput(a, s)) {
                     canFind = true;
                     user.removeAccount(a);
-                    System.out.println("Account has been removed successfully!");
+                    System.out.println("Account removed successfully!");
                     break;
                 }
             }
@@ -285,7 +286,6 @@ public class PasswordVault {
         }
     }
 
-    // MODIFIES: this
     // EFFECTS: allows users to view a particular account in detail
     private void viewAccount() {
         boolean canFind = false;
@@ -306,11 +306,10 @@ public class PasswordVault {
         }
     }
 
-    // MODIFIES: this
     // EFFECTS: allows user to preview all accounts
     private boolean viewAll() {
         if (user.size() <= 0) {
-            System.out.println("You don't have any accounts saved yet!");
+            System.out.println("You do not have any accounts saved yet!");
             return false;
         } else {
             for (Account a : user.getAccountList()) {
@@ -333,7 +332,7 @@ public class PasswordVault {
     }
 
     // EFFECTS: checks if the account ID is the same as the input s
-    //          and checks if s is an integer
+    //          and checks if the given s is an integer
     private boolean matchIdAndInput(Account a, String s) {
         return String.valueOf(a.getId()).equals(s);
     }
