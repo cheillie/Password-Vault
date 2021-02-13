@@ -24,7 +24,7 @@ tells me, it's not safe to have the same password for every single website,
 so I created this application to help keep track of all the passwords and 
 different email addresses I created.
 
-##User Stories
+**User Stories**
 - As a user, I want to be able to add a password to my saved list
 - As a user, I want to be able to edit a password that I've already saved
 - As a user, I want to be able to remove a password that I've already saved
