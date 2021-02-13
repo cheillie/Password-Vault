@@ -144,20 +144,9 @@ public class PasswordVault {
             viewAccount();
         } else if (command.equals("5")) {
             viewAll();
-        } else if (command.equals("r")) {
-            cheat();
         } else {
             System.out.println("Selection not valid...");
         }
-    }
-
-    private void cheat() {
-        Account account1 = new Account("fb", "123", "cherry", "gmail");
-        Account account2 = new Account("ig", "3321", "leo", "hotmail");
-        Account account3 = new Account("vsco", "1111", "brandon", "qq.com");
-        user.addAccount(account1);
-        user.addAccount(account2);
-        user.addAccount(account3);
     }
 
     // MODIFIES: this
@@ -296,7 +285,7 @@ public class PasswordVault {
         }
     }
 
-    // !!! does this modify?
+    // MODIFIES: this
     // EFFECTS: allows users to view a particular account in detail
     private void viewAccount() {
         boolean canFind = false;
@@ -317,7 +306,7 @@ public class PasswordVault {
         }
     }
 
-    // !!! does this modify?
+    // MODIFIES: this
     // EFFECTS: allows user to preview all accounts
     private boolean viewAll() {
         if (user.size() <= 0) {
