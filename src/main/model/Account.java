@@ -11,7 +11,7 @@ public class Account {
     private String website;
 
 
-    // EFFECTS: constructs an account with an ID, password, username, email, and notes
+    // EFFECTS: constructs an account with an website, password, username, and email
     public Account(String website, String password, String username, String email) {
         this.id = nextAccountId++;
         this.password = password;
