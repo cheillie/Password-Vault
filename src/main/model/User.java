@@ -1,11 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a user with different accounts saved and a login pin
 
-public class User {
+public class User implements Writable {
     private List<Account> accountList;
     private int login;
 
@@ -19,6 +23,11 @@ public class User {
     // EFFECTS: returns the account list
     public List<Account> getAccountList() {
         return accountList;
+    }
+
+    // EFFECTS: returns the login
+    public int getLogin() {
+        return login;
     }
 
     // MODIFIES: this
@@ -51,4 +60,22 @@ public class User {
         return accountList.contains(account);
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("login", login);
+        json.put("accounts", accountsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray accountsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Account a: accountList) {
+            jsonArray.put(a.toJson());
+        }
+
+        return jsonArray;
+    }
 }

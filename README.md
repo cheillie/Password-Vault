@@ -30,7 +30,7 @@ different email addresses I created.
 - As a user, I want to be able to remove a password that I've already saved
 - As a user, I want to be able to click into a saved password to see its details 
 (email address, username, etc.)
-- As a user, I want to be able to save a list of passwords to one user
+- As a user, I want to be able to save a list of passwords to a user
 - As a user, I want to be able to enter a short 4-digit password to enter the Password
 Vault Application (load the user's saved passwords)
 

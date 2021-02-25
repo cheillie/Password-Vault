@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents an account with a website, password, username, and email
-public class Account {
+public class Account implements Writable {
 
     private static int nextAccountId = 1;
     private int id;
@@ -73,5 +76,16 @@ public class Account {
     // EFFECTS: sets the account's email
     public void setEmail(String s) {
         email = s;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("id", id);
+        json.put("website", website);
+        json.put("password", password);
+        json.put("username", username);
+        json.put("email", email);
+        return json;
     }
 }

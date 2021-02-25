@@ -2,22 +2,31 @@ package ui;
 
 import model.Account;
 import model.User;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Password Vault application
 
 public class PasswordVault {
 
+    private static final String JSON_STORE = "./data/user.json";
     private int login;
     private Scanner input;
     private User user;
     private boolean keepGoing = true;
     private boolean isLogin = true;
     boolean stillRunning = true;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the Password Vault application
-    public PasswordVault() {
+    public PasswordVault() throws FileNotFoundException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runVault();
     }
 
@@ -76,7 +85,7 @@ public class PasswordVault {
         if (command.equals("1")) {
             init();
         } else if (command.equals("2")) {
-            System.out.println("try again later :)..");
+            loadUser();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -109,7 +118,6 @@ public class PasswordVault {
         if (input.length() != 4) {
             return false;
         }
-        // source: https://www.w3schools.com/java/java_try_catch.asp
         try {
             Integer i = Integer.parseInt(input);
         } catch (Exception e) {
@@ -117,7 +125,6 @@ public class PasswordVault {
         }
         return true;
     }
-
 
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
@@ -127,6 +134,8 @@ public class PasswordVault {
         System.out.println("\t3 -> delete account");
         System.out.println("\t4 -> view account detail");
         System.out.println("\t5 -> view all");
+        System.out.println("\t-------------------------");
+        System.out.println("\ts -> save");
         System.out.println("\tq -> quit");
     }
 
@@ -144,6 +153,8 @@ public class PasswordVault {
             viewAccount();
         } else if (command.equals("5")) {
             viewAll();
+        } else if (command.equals("s")) {
+            saveUser();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -337,4 +348,27 @@ public class PasswordVault {
         return String.valueOf(a.getId()).equals(s);
     }
 
+    // EFFECTS: saves the user to file
+    private void saveUser() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(user);
+            jsonWriter.close();
+            System.out.println("Saved user to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads user from file if the logins match
+    private void loadUser() {
+        try {
+            user = jsonReader.read();
+            System.out.println("Loaded user from " + JSON_STORE);
+            isLogin = false;
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 }
