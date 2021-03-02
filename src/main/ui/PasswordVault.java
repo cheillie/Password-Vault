@@ -2,11 +2,13 @@ package ui;
 
 import model.Account;
 import model.User;
+import org.json.JSONObject;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 // Password Vault application
@@ -74,8 +76,8 @@ public class PasswordVault {
     // EFFECTS: displays menu of options to user
     private void loginMenu() {
         System.out.println("\nSelect from:");
-        System.out.println("\t1 -> Create your password");
-        System.out.println("\t2 -> Enter existing password (doesn't work yet, will implement in the future)");
+        System.out.println("\t1 -> Create your login");
+        System.out.println("\t2 -> Enter existing login");
         System.out.println("\t3 -> quit");
     }
 
@@ -175,7 +177,7 @@ public class PasswordVault {
         System.out.println("Enter email:");
         String email = input.next();
 
-        Account account = new Account(website, password, username,email);
+        Account account = new Account(website, password, username, email);
         user.addAccount(account);
 
         System.out.println("Account saved successfully!");
@@ -364,7 +366,22 @@ public class PasswordVault {
     // EFFECTS: loads user from file if the logins match
     private void loadUser() {
         try {
+            Scanner input = new Scanner(System.in);
+            System.out.println("Enter login password:");
+            String s = input.next();
+
             user = jsonReader.read();
+
+            while (!s.equals(String.valueOf(user.getLogin()))) {
+                if (s.equals("b")) {
+                    return;               // if user forgot password, return to the login menu
+                } else {
+                    System.out.println("The login is incorrect, try again");
+                    System.out.println("b -> back");
+                }
+                s = input.next();
+            }
+
             System.out.println("Loaded user from " + JSON_STORE);
             isLogin = false;
         } catch (IOException e) {
@@ -372,3 +389,4 @@ public class PasswordVault {
         }
     }
 }
+
