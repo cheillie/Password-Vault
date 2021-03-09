@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.json.*;
@@ -27,6 +29,7 @@ public class JsonReader {
         return parseUser(jsonObject);
     }
 
+    // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
@@ -45,6 +48,8 @@ public class JsonReader {
         return user;
     }
 
+    // MODIFIES: user
+    // EFFECTS: parses accounts from JSON object and adds them to user
     private void addAccounts(User user, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("accounts");
         for (Object json : jsonArray) {
@@ -53,6 +58,8 @@ public class JsonReader {
         }
     }
 
+    // MODIFIES: user
+    // EFFECTS: parses account from JSON object and adds it to user
     private void addAccount(User user, JSONObject jsonObject) {
         //int id = jsonObject.getInt("id");
         String website = jsonObject.getString("website");
@@ -63,5 +70,17 @@ public class JsonReader {
         //account.setId(id);
         user.addAccount(account);
     }
+
+//    // EFFECTS:
+//    private List<User> parseUsers(JSONArray jsonArray) {
+//        List<User> userList = new ArrayList<>();
+//
+//        for (Object json : jsonArray) {
+//            JSONObject nextUser = (JSONObject) json;
+//            userList.add(parseUser(nextUser));
+//        }
+//
+//        return userList;
+//    }
 
 }

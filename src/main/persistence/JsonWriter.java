@@ -1,11 +1,14 @@
 package persistence;
 
+import model.Account;
 import model.User;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.List;
 
 public class JsonWriter {
     private static final int TAB = 4;
@@ -42,4 +45,15 @@ public class JsonWriter {
     private void saveToFile(String json) {
         writer.print(json);
     }
+
+//    // EFFECTS:
+//    public void writeUsers(List<User> userList) {
+//        JSONArray jsonArray = new JSONArray();
+//
+//        for (User u: userList) {
+//            jsonArray.put(u.toJson());
+//        }
+//
+//        saveToFile(jsonArray.toString(TAB));
+//    }
 }

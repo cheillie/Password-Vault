@@ -9,6 +9,7 @@ import persistence.JsonWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLOutput;
+import java.util.List;
 import java.util.Scanner;
 
 // Password Vault application
@@ -24,6 +25,7 @@ public class PasswordVault {
     boolean stillRunning = true;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
+    private List<User> userList;
 
     // EFFECTS: runs the Password Vault application
     public PasswordVault() throws FileNotFoundException {
@@ -361,6 +363,17 @@ public class PasswordVault {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
+
+//    private void saveUsers() {
+//        try {
+//            jsonWriter.open();
+//            jsonWriter.write(userList);
+//            jsonWriter.close();
+//            System.out.println("Saved user to " + JSON_STORE);
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Unable to write to file: " + JSON_STORE);
+//        }
+//    }
 
     // MODIFIES: this
     // EFFECTS: loads user from file if the logins match
