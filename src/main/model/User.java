@@ -55,7 +55,7 @@ public class User implements Writable {
     }
 
     // EFFECTS: Returns true if Account is in the account list
-    // and false otherwise
+    //          and false otherwise
     public boolean contains(Account account) {
         return accountList.contains(account);
     }
@@ -68,7 +68,7 @@ public class User implements Writable {
         return json;
     }
 
-    // EFFECTS: returns things in this workroom as a JSON array
+    // EFFECTS: returns accounts in this user as a JSON array
     private JSONArray accountsToJson() {
         JSONArray jsonArray = new JSONArray();
 
