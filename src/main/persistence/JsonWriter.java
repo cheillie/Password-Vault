@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
 
+// Represents a writer that writes JSON representation of user to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;

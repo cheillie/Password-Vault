@@ -12,7 +12,7 @@ import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
-// Password Vault application
+// Represents the Password Vault application
 
 public class PasswordVault {
 
