@@ -29,7 +29,7 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of user to file
     public void write(User user) {
         JSONObject json = user.toJson();
         saveToFile(json.toString(TAB));
@@ -47,7 +47,7 @@ public class JsonWriter {
         writer.print(json);
     }
 
-//    // EFFECTS:
+//    // EFFECTS: writes JSON representation of users to file
 //    public void writeUsers(List<User> userList) {
 //        JSONArray jsonArray = new JSONArray();
 //

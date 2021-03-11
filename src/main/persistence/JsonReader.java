@@ -72,7 +72,7 @@ public class JsonReader {
         user.addAccount(account);
     }
 
-//    // EFFECTS:
+//    // EFFECTS: parses List<User> from JSON object and returns it
 //    private List<User> parseUsers(JSONArray jsonArray) {
 //        List<User> userList = new ArrayList<>();
 //
