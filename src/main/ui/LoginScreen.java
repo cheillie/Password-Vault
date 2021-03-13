@@ -11,8 +11,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Arrays;
 
-import static javax.swing.SwingConstants.CENTER;
-
 // Represents the home screen PasswordVault application
 public class LoginScreen implements ActionListener {
 
@@ -130,14 +128,13 @@ public class LoginScreen implements ActionListener {
                 }
             } else {
                 JOptionPane.showMessageDialog(controllingFrame,
-                        "Invalid password. Try again.",
-                        "Error Message",
-                        JOptionPane.ERROR_MESSAGE);
+                        "Invalid password. Try again.", "Error Message", JOptionPane.ERROR_MESSAGE);
             }
-            // !!! add the if input == existing login then go through else fudge off
         }
 
-        // if (CREATE.equals(cmd)) {          // !!! implement create new login
+        if (CREATE.equals(cmd)) {
+            createNewLogin(e);
+        }
     }
 
     // EFFECTS: checks if the login entered matches with the saved login
@@ -160,4 +157,35 @@ public class LoginScreen implements ActionListener {
         Arrays.fill(correctPassword, '0');
         return isCorrect;
     }
+
+    // EFFECTS: renders the create new login pop up dialog
+    public void createNewLogin(ActionEvent e) {
+        String cmd = e.getActionCommand();
+
+        if (CREATE.equals(cmd)) {
+            String input = JOptionPane.showInputDialog("Enter your new 4 digit login: ");
+
+            if (input != null && input.length() == 4) {
+                try {
+                    Integer i = Integer.parseInt(input);
+                    JOptionPane.showMessageDialog(controllingFrame, "Login created successfully",
+                            "Login created",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(controllingFrame, "Invalid login. Try again.",
+                            "Error Message",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            } else if (input == null) {
+                System.out.println("Action cancelled");
+            } else {
+                JOptionPane.showMessageDialog(controllingFrame, "Invalid login. Try again.",
+                        "Error Message",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+
 }
+
