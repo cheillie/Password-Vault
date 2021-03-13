@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Arrays;
 
+import static javax.swing.SwingConstants.CENTER;
+
 // Represents the home screen PasswordVault application
 public class LoginScreen implements ActionListener {
 
@@ -49,13 +51,13 @@ public class LoginScreen implements ActionListener {
     // MODIFIES: this
     // EFFECTS: renders the logo icon on the home screen
     public void renderLogo() {
-        ImageIcon imageLock = new ImageIcon(".//data//lock.png");
-        Image image = imageLock.getImage().getScaledInstance(230, 230, Image.SCALE_SMOOTH);
+        ImageIcon imageLock = new ImageIcon(".//data//lock2.png");
+        Image image = imageLock.getImage().getScaledInstance(270, 290, Image.SCALE_SMOOTH);
         imageLock = new ImageIcon(image);
 
         JLabel img = new JLabel();
         img.setIcon(imageLock);
-        img.setBounds(305, -100, 500, 500);
+        img.setBounds(290, -75, 500, 500);
 
         frame.add(img);
     }
@@ -77,7 +79,7 @@ public class LoginScreen implements ActionListener {
 
         textPanel.add(createEnterButton());
 
-        textPanel.setBounds(180, 295, 400, 40);
+        textPanel.setBounds(180, 310, 400, 40);
         textPanel.setBackground(BACKGROUND_COLOUR);
         frame.add(textPanel);
 
@@ -100,7 +102,7 @@ public class LoginScreen implements ActionListener {
         JButton createNewLoginButton = new JButton("Create new login");
         createNewLoginButton.setFont(new Font("Barlow", Font.BOLD, 13));
         createNewLoginButton.setPreferredSize(new Dimension(70, 25));
-        createNewLoginButton.setBounds(345, 340, 150, 30); // sets location of create button
+        createNewLoginButton.setBounds(345, 350, 150, 30); // sets location of create button
         createNewLoginButton.setFocusable(false);
         createNewLoginButton.setActionCommand(CREATE);      // in order for this button to work, the action listener
         createNewLoginButton.addActionListener(this);    // is waiting for the command to == ENTER
