@@ -95,7 +95,7 @@ public class LoginScreen implements ActionListener {
         return enterButton;
     }
 
-    // EFFECTS: create a create new button
+    // EFFECTS: create a create new login button
     public JButton createCreateNewLoginButton() {
         JButton createNewLoginButton = new JButton("Create new login");
         createNewLoginButton.setFont(new Font("Barlow", Font.BOLD, 13));
@@ -111,11 +111,11 @@ public class LoginScreen implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String cmd = e.getActionCommand();
 
-        if (ENTER.equals(cmd)) { // go through
+        if (ENTER.equals(cmd)) {
             char[] input = loginField.getPassword();
 
             if (isPasswordCorrect(input)) {
-                this.frame.setVisible(false);            //!!! fix bug
+                this.frame.setVisible(false);            //!!! fix bug, closes shows up top left
                 JFrame frame = new PasswordVaultUI();
                 frame.setVisible(true);
 
