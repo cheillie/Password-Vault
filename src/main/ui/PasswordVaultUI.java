@@ -1,5 +1,6 @@
 package ui;
 
+import ui.pages.PasswordListPage;
 import ui.pages.SavePasswordPage;
 
 import javax.swing.*;
@@ -14,58 +15,87 @@ public class PasswordVaultUI extends JFrame implements ActionListener {
     protected static Color BORDER_COLOUR = new Color(142, 141, 138);
     protected static Color BUTTON_COLOUR = new Color(219, 149, 58, 255);
 
-    JFrame frame;
     JPanel leftPanel;
     JButton newPasswordButton;
+    SavePasswordPage savePasswordPage;
+    PasswordListPage passwordListPage;
 
     //MODIFIES: this
     //EFFECTS: creates PasswordVaultUI, loads PasswordVault appliances, displays sidebar and tabs
     public PasswordVaultUI() {
-        frame = new JFrame("Password Vault");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                // exit program
-        frame.getContentPane().setBackground(LoginScreen.BACKGROUND_COLOUR);
-        frame.setResizable(false);                                          // can't drag to resize
-        frame.setSize(850, 500);                               // set window size
-        frame.setLayout(null);                                              // sets default layout to null
-        frame.setLocationRelativeTo(null);                                  // centers window
+        this.setTitle("Password Vault");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                // exit program
+        this.getContentPane().setBackground(Color.RED);
+        this.setResizable(false);                                          // can't drag to resize
+        this.setSize(850, 500);                               // set window size
+        this.setLayout(null);                                              // sets default layout to null
+        this.setLocationRelativeTo(null);                                  // centers window
 
         createLeftPanel();
+        createPasswordListPage();
 
-        frame.setVisible(true);
+        this.setVisible(true);
     }
 
     // MODIFIES: this
     // EFFECTS: creates the left panel
     private void createLeftPanel() {
         leftPanel = new JPanel();
-        leftPanel.setBounds(-3, -3, 190, frame.getHeight());
+        leftPanel.setBounds(-3, -3, 190, this.getHeight());
         leftPanel.setBackground(PANEL_COLOUR);
         leftPanel.setBorder(BorderFactory.createLineBorder(BORDER_COLOUR, 2));
         createNewPasswordButton();
-        frame.add(leftPanel);
+        this.add(leftPanel);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates the right panel
+    private void createPasswordListPage() {
+        passwordListPage = new PasswordListPage(this);
     }
 
     // MODIFIES: this
     // EFFECTS: creates the new password button in left panel
     private void createNewPasswordButton() {
         newPasswordButton = new JButton("Save New Password");
-        newPasswordButton.setBounds(17, 100, 150, 60);               // set location of button
+        newPasswordButton.setBounds(17, 101, 150, 60);               // set location of button
         newPasswordButton.setBackground(BUTTON_COLOUR);     // set background of button
         newPasswordButton.setForeground(Color.white);                                 // font colour
         newPasswordButton.setFont(new Font("Barlow", Font.BOLD, 13));       // font size and font
         //newPasswordButton.setBorder(new LineBorder(Color.BLACK));                  // button border
         newPasswordButton.setBorder(BorderFactory.createEtchedBorder());
-        newPasswordButton.setFocusable(false);                                   // no more white outline around font
+        newPasswordButton.setFocusable(false);                               // no more white outline around font
+        newPasswordButton.addActionListener(this);
 
-        frame.add(newPasswordButton);
+        this.add(newPasswordButton);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == newPasswordButton) {
-            new SavePasswordPage();
+            //makeSavePasswordPage();
+            savePasswordPage = new SavePasswordPage(this);
+            newPasswordButton.setVisible(false);
+            leftPanel.setVisible(false);
+
         }
     }
+
+//    // MODIFIES: this
+//    // EFFECTS: renders the save password page
+//    public void makeSavePasswordPage() {
+//        savePasswordPage = new JPanel();
+//        this.add(savePasswordPage);
+//
+//        savePasswordPage.setBounds(0, 0, this.getWidth(), this.getHeight());
+//        savePasswordPage.setBackground(LoginScreen.BACKGROUND_COLOUR);
+//        savePasswordPage.setVisible(true);
+//
+//        newPasswordButton.setVisible(false);
+//        leftPanel.setVisible(false);
+//    }
+
+
 }
 
 

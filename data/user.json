@@ -1,0 +1,19 @@
+{
+    "accounts": [
+        {
+            "website": "fb",
+            "password": "`1342",
+            "id": 1,
+            "email": "@gmail",
+            "username": "cherry"
+        },
+        {
+            "website": "ig",
+            "password": "4254",
+            "id": 2,
+            "email": "@hotmail",
+            "username": "cher"
+        }
+    ],
+    "login": 1234
+}
