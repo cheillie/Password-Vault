@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -24,7 +25,7 @@ public class LoginScreen implements ActionListener {
     private JPasswordField loginField;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private User user;
+    protected User user;
 
     // MODIFIES: this
     // EFFECTS: creates the HomeScreen
@@ -115,14 +116,15 @@ public class LoginScreen implements ActionListener {
             char[] input = loginField.getPassword();
 
             if (isPasswordCorrect(input)) {
-                this.frame.setVisible(false);            //!!! fix bug, closes shows up top left
-                JFrame frame = new PasswordVaultUI();
-                frame.setVisible(true);
+                this.frame.setVisible(false);
 
                 System.out.println("Password is correct");
                 try {
                     user = jsonReader.read();
                     System.out.println("Loaded user from " + JSON_STORE);
+                    JFrame frame = new PasswordVaultUI(user);
+                    frame.setVisible(true);
+
                 } catch (IOException ioException) {
                     System.out.println("Unable to read from file: " + JSON_STORE);
                 }
@@ -167,25 +169,32 @@ public class LoginScreen implements ActionListener {
 
             if (input != null && input.length() == 4) {
                 try {
-                    Integer i = Integer.parseInt(input);
+                    Integer.parseInt(input);
                     JOptionPane.showMessageDialog(controllingFrame, "Login created successfully",
                             "Login created",
                             JOptionPane.INFORMATION_MESSAGE);
+
+                    this.frame.setVisible(false);
+                    JFrame frame = new PasswordVaultUI(user);
+                    frame.setVisible(true);
+                    
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(controllingFrame, "Invalid login. Try again.",
-                            "Error Message",
-                            JOptionPane.ERROR_MESSAGE);
+                    messageDialogErrorMsg();
                 }
             } else if (input == null) {
                 System.out.println("Action cancelled");
             } else {
-                JOptionPane.showMessageDialog(controllingFrame, "Invalid login. Try again.",
-                        "Error Message",
-                        JOptionPane.ERROR_MESSAGE);
+                messageDialogErrorMsg();
             }
         }
     }
 
+    // EFFECTS: show message dialog for an invalid login error message
+    public void messageDialogErrorMsg() {
+        JOptionPane.showMessageDialog(controllingFrame, "Not a 4 digit login. Try again.",
+                "Error Message",
+                JOptionPane.ERROR_MESSAGE);
+    }
 
 }
 
