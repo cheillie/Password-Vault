@@ -73,7 +73,7 @@ public class PasswordListPage extends JPanel {
             }
         } else {
             JLabel label = new JLabel("No accounts added yet");
-            label.setFont(new Font("Barlow", Font.BOLD, 13));
+            label.setFont(SavePasswordPage.FONT_STYLE);
             label.setForeground(new Color(62, 62, 62));
             panelWithGridBagLayout.add(label);
         }
@@ -104,13 +104,14 @@ public class PasswordListPage extends JPanel {
         }
     }
 
-    // MODIFIES: creates the delete account button
+    // MODIFIES: this
+    // EFFECTS: creates the delete account button
     public void addDeleteButton(JPanel accountPanel, Account account) {
         JButton button = new JButton("Delete");
         button.setForeground(Color.WHITE);
         button.setBackground(new Color(229, 51, 51));
-        button.setFont(new Font("Barlow", Font.BOLD, 13));
-        button.setBounds(500, 55, 75, 35);
+        button.setFont(SavePasswordPage.FONT_STYLE);
+        button.setBounds(500, 55, 78, 35);
         button.setFocusable(false);
 
         button.addActionListener(new DeleteButtonHandler());
@@ -123,7 +124,8 @@ public class PasswordListPage extends JPanel {
     // EFFECTS: renders the account detail
     public void addLabelToContainAccountPanel(String s, JPanel containAccountPanel) {
         JLabel label = new JLabel(s);
-        label.setFont(new Font("Barlow", Font.BOLD, 13));
+        label.setFont(new Font("Bahnschrift", Font.BOLD, 14));
+        label.setForeground(new Color(62, 62, 62));
         containAccountPanel.add(label);
     }
 

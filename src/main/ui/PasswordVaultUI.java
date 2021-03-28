@@ -18,6 +18,7 @@ public class PasswordVaultUI extends JFrame implements ActionListener {
     protected static Color PANEL_COLOUR = new Color(231, 225, 199);
     protected static Color BORDER_COLOUR = new Color(142, 141, 138);
     protected static Color BUTTON_COLOUR = new Color(219, 149, 58, 255);
+    protected static Font FONT_STYLE =  new Font("Bahnschrift", Font.BOLD, 13);
 
     private JPanel leftPanel;
     private JButton newPasswordButton;
@@ -71,14 +72,13 @@ public class PasswordVaultUI extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: creates the new password button in left panel
     private void createNewPasswordButton() {
-        newPasswordButton = new JButton("Save New Password");
-        newPasswordButton.setBounds(17, 101, 150, 60);             // set location of button
-        newPasswordButton.setBackground(BUTTON_COLOUR);     // set background of button
-        newPasswordButton.setForeground(Color.white);                                // font colour
-        newPasswordButton.setFont(new Font("Barlow", Font.BOLD, 13));      // font size and font
-        //newPasswordButton.setBorder(new LineBorder(Color.BLACK));                  // button border
+        newPasswordButton = new JButton("Save Password");
+        newPasswordButton.setBounds(17, 101, 150, 60);           // set location of button
+        newPasswordButton.setBackground(BUTTON_COLOUR);
+        newPasswordButton.setForeground(Color.white);
+        newPasswordButton.setFont(FONT_STYLE);
         newPasswordButton.setBorder(BorderFactory.createEtchedBorder());
-        newPasswordButton.setFocusable(false);                              // no more white outline around font
+        newPasswordButton.setFocusable(false);
         newPasswordButton.addActionListener(this);
 
         this.add(newPasswordButton);
@@ -89,12 +89,11 @@ public class PasswordVaultUI extends JFrame implements ActionListener {
     private void createSaveAndQuitButton() {
         saveAndQuitButton = new JButton("Save & Quit");
         saveAndQuitButton.setBounds(17, 250, 150, 60);             // set location of button
-        saveAndQuitButton.setBackground(BUTTON_COLOUR);     // set background of button
-        saveAndQuitButton.setForeground(Color.white);                                // font colour
-        saveAndQuitButton.setFont(new Font("Barlow", Font.BOLD, 13));      // font size and font
-        //newPasswordButton.setBorder(new LineBorder(Color.BLACK));                  // button border
+        saveAndQuitButton.setBackground(BUTTON_COLOUR);
+        saveAndQuitButton.setForeground(Color.white);
+        saveAndQuitButton.setFont(FONT_STYLE);
         saveAndQuitButton.setBorder(BorderFactory.createEtchedBorder());
-        saveAndQuitButton.setFocusable(false);                              // no more white outline around font
+        saveAndQuitButton.setFocusable(false);
         saveAndQuitButton.addActionListener(this);
 
         this.add(saveAndQuitButton);
@@ -103,7 +102,6 @@ public class PasswordVaultUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == newPasswordButton) {
-            //makeSavePasswordPage();
             savePasswordPage = new SavePasswordPage(this);
             newPasswordButton.setVisible(false);
             saveAndQuitButton.setVisible(false);
@@ -111,10 +109,11 @@ public class PasswordVaultUI extends JFrame implements ActionListener {
             passwordListPage.setVisible(false);
         } else if (e.getSource() == saveAndQuitButton) {
             saveUser();
-            System.exit(0); // stops application
+            System.exit(0);                                 // stops application
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: shows the passwordVaultUI page
     public void showPasswordVaultUIPanels() {
         newPasswordButton.setVisible(true);
@@ -128,12 +127,13 @@ public class PasswordVaultUI extends JFrame implements ActionListener {
         return user;
     }
 
+    // MODIFIES: this
     // EFFECTS: sets the password list page
-    public void setPasswordListPage(PasswordListPage p) {
-        this.passwordListPage = p;
+    public void setPasswordListPage(PasswordListPage passwordListPage) {
+        this.passwordListPage = passwordListPage;
     }
 
-    // EFFECTS: saves the user
+    // EFFECTS: saves the user to file
     private void saveUser() {
         try {
             jsonWriter.open();
@@ -144,22 +144,6 @@ public class PasswordVaultUI extends JFrame implements ActionListener {
             System.out.println("Unable to write to file: " + LoginScreen.JSON_STORE);
         }
     }
-
-
-//    // MODIFIES: this
-//    // EFFECTS: renders the save password page
-//    public void makeSavePasswordPage() {
-//        savePasswordPage = new JPanel();
-//        this.add(savePasswordPage);
-//
-//        savePasswordPage.setBounds(0, 0, this.getWidth(), this.getHeight());
-//        savePasswordPage.setBackground(LoginScreen.BACKGROUND_COLOUR);
-//        savePasswordPage.setVisible(true);
-//
-//        newPasswordButton.setVisible(false);
-//        leftPanel.setVisible(false);
-//    }
-
 
 }
 

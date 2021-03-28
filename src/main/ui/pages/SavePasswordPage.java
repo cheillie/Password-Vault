@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 public class SavePasswordPage extends JPanel implements ActionListener {
 
     protected static Color BACKGROUND_COLOUR = new Color(210, 182, 142);
+    protected static Font FONT_STYLE =  new Font("Bahnschrift", Font.BOLD, 13);
+
     private static String SAVE = "SAVE";
     private static String BACK = "back";
     private JTextField website;
@@ -69,7 +71,7 @@ public class SavePasswordPage extends JPanel implements ActionListener {
         textFieldPanel.add(textField);
         textFieldPanel.setBackground(BACKGROUND_COLOUR);
 
-        label.setFont(new Font("Barlow", Font.BOLD, 13));
+        label.setFont(FONT_STYLE);
         label.setLabelFor(textField);
 
         panel.add(textFieldPanel);
@@ -77,11 +79,10 @@ public class SavePasswordPage extends JPanel implements ActionListener {
         return textField;
     }
 
-
     // EFFECTS: creates the save password button
     public JButton createSaveButton() {
         JButton saveButton = new JButton("SAVE");
-        saveButton.setFont(new Font("Barlow", Font.BOLD, 13));
+        saveButton.setFont(FONT_STYLE);
         saveButton.setBounds(400, 350, 85, 30);
         saveButton.setFocusable(false);
         saveButton.setActionCommand(SAVE);
@@ -93,7 +94,7 @@ public class SavePasswordPage extends JPanel implements ActionListener {
     // EFFECTS: creates the back button
     public JButton createBackButton() {
         JButton backButton = new JButton("back");
-        backButton.setFont(new Font("Barlow", Font.BOLD, 13));
+        backButton.setFont(FONT_STYLE);
         backButton.setBounds(15, 15, 65, 30);
         backButton.setFocusable(false);
         backButton.setActionCommand(BACK);

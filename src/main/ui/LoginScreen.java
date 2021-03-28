@@ -69,7 +69,7 @@ public class LoginScreen implements ActionListener {
         loginField.addActionListener(this);
 
         JLabel label = new JLabel("Enter login: ");
-        label.setFont(new Font("Barlow", Font.BOLD, 13));
+        label.setFont(PasswordVaultUI.FONT_STYLE);
         label.setLabelFor(loginField);
 
         JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
@@ -88,23 +88,25 @@ public class LoginScreen implements ActionListener {
     // EFFECTS: creates a enter button
     public JButton createEnterButton() {
         JButton enterButton = new JButton("Enter");
-        enterButton.setFont(new Font("Barlow", Font.BOLD, 13));
-        enterButton.setPreferredSize(new Dimension(70, 25));
+        enterButton.setFont(PasswordVaultUI.FONT_STYLE);
+        enterButton.setPreferredSize(new Dimension(73, 25));
         enterButton.setFocusable(false);
         enterButton.setActionCommand(ENTER);
         enterButton.addActionListener(this);    // is waiting for the command to == ENTER
+
         return enterButton;
     }
 
     // EFFECTS: create a create new login button
     public JButton createCreateNewLoginButton() {
         JButton createNewLoginButton = new JButton("Create new login");
-        createNewLoginButton.setFont(new Font("Barlow", Font.BOLD, 13));
+        createNewLoginButton.setFont(PasswordVaultUI.FONT_STYLE);
         createNewLoginButton.setPreferredSize(new Dimension(70, 25));
         createNewLoginButton.setBounds(345, 350, 150, 30); // sets location of create button
         createNewLoginButton.setFocusable(false);
         createNewLoginButton.setActionCommand(CREATE);      // in order for this button to work, the action listener
         createNewLoginButton.addActionListener(this);    // is waiting for the command to == ENTER
+
         return createNewLoginButton;
     }
 
