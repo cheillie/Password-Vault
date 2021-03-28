@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class LoginScreen implements ActionListener {
 
     protected static Color BACKGROUND_COLOUR = new Color(210, 182, 142);
-    private static final String JSON_STORE = "./data/user.json";
+    protected static final String JSON_STORE = "./data/user.json";
 
     private static String ENTER = "Enter";
     private static String CREATE = "Create";
@@ -122,7 +122,7 @@ public class LoginScreen implements ActionListener {
                 try {
                     user = jsonReader.read();
                     System.out.println("Loaded user from " + JSON_STORE);
-                    JFrame frame = new PasswordVaultUI(user);
+                    JFrame frame = new PasswordVaultUI(user, jsonWriter, jsonReader);
                     frame.setVisible(true);
 
                 } catch (IOException ioException) {
@@ -175,9 +175,9 @@ public class LoginScreen implements ActionListener {
                             JOptionPane.INFORMATION_MESSAGE);
 
                     this.frame.setVisible(false);
-                    JFrame frame = new PasswordVaultUI(user);
+                    JFrame frame = new PasswordVaultUI(new User(Integer.parseInt(input)), jsonWriter, jsonReader);
                     frame.setVisible(true);
-                    
+
                 } catch (NumberFormatException ex) {
                     messageDialogErrorMsg();
                 }

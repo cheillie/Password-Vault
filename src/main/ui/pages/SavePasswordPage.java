@@ -116,6 +116,10 @@ public class SavePasswordPage extends JPanel implements ActionListener {
             passwordVaultUI.getUser().addAccount(account);
 
             JOptionPane.showMessageDialog(this, "Account saved successfully!");
+            passwordVaultUI.setPasswordListPage(new PasswordListPage(passwordVaultUI));
+            this.setVisible(false);
+
+            passwordVaultUI.showPasswordVaultUIPanels();
         }
 
         if (BACK.equals(cmd)) {
