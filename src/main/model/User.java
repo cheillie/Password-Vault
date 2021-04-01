@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.DoesNotExistAccount;
+import exceptions.EmptyAccountListException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -20,6 +22,7 @@ public class User implements Writable {
         this.login = login;
     }
 
+
     // EFFECTS: returns the account list
     public List<Account> getAccountList() {
         return accountList;
@@ -36,10 +39,16 @@ public class User implements Writable {
         accountList.add(account);
     }
 
-    // REQUIRES: account list is not empty and account is an element of the account list
     // MODIFIES: this
     // EFFECTS: removes an account from account list
-    public void removeAccount(Account account) {
+    public void removeAccount(Account account) throws EmptyAccountListException, DoesNotExistAccount {
+        if (accountList.size() <= 0) {
+            throw new EmptyAccountListException();
+        }
+
+        if (!accountList.contains(account)) {
+            throw new DoesNotExistAccount();
+        }
         accountList.remove(account);
     }
 

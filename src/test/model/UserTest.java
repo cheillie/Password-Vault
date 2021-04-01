@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.DoesNotExistAccount;
+import exceptions.EmptyAccountListException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,11 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserTest {
     private User testUser;
     private Account testAccount;
+    private Account testAccount2;
 
     @BeforeEach
     public void runBefore() {
         testUser = new User(1234);
         testAccount = new Account("facebook", "123456", "cherry", "cherry@gmail.com");
+        testAccount2 = new Account("instagram", "654321", "john", "john@gmail.com");
     }
 
     @Test
@@ -31,11 +35,43 @@ public class UserTest {
     }
 
     @Test
-    public void testRemoveAccount() {
+    public void testRemoveAccountNoException() {
         testUser.addAccount(testAccount);
-        testUser.removeAccount(testAccount);
-        assertEquals(0, testUser.size());
-        assertFalse(testUser.contains(testAccount));
+        try {
+            testUser.removeAccount(testAccount);
+            assertEquals(0, testUser.size());
+            assertFalse(testUser.contains(testAccount));
+            // pass
+        } catch (EmptyAccountListException e) {
+            fail("Should not have caught exception");
+        } catch (DoesNotExistAccount doesNotExistAccount) {
+            fail("Should not have caught exception");
+        }
+    }
+
+    @Test
+    public void testRemoveAccountEmptyAccountListException() {
+        try {
+            testUser.removeAccount(testAccount);
+            fail("Exception not thrown");
+        } catch (EmptyAccountListException e) {
+            // pass
+        } catch (DoesNotExistAccount doesNotExistAccount) {
+            fail("Should not have caught exception");
+        }
+    }
+
+    @Test
+    public void testRemoveAccountDoesNotExistAccount() {
+        testUser.addAccount(testAccount);
+        try {
+            testUser.removeAccount(testAccount2);
+            fail("Exception not thrown");
+        } catch (EmptyAccountListException e) {
+            fail("Should not have caught exception");
+        } catch (DoesNotExistAccount doesNotExistAccount) {
+            // pass
+        }
     }
 
     @Test

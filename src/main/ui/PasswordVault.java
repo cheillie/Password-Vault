@@ -1,5 +1,7 @@
 package ui;
 
+import exceptions.DoesNotExistAccount;
+import exceptions.EmptyAccountListException;
 import model.Account;
 import model.User;
 import org.json.JSONObject;
@@ -290,9 +292,15 @@ public class PasswordVault {
             for (Account a : user.getAccountList()) {
                 if (matchIdAndInput(a, s)) {
                     canFind = true;
-                    user.removeAccount(a);
-                    System.out.println("Account removed successfully!");
-                    break;
+                    try {
+                        user.removeAccount(a);
+                        System.out.println("Account removed successfully!");
+                        break;
+                    } catch (EmptyAccountListException e) {
+                        System.out.println("No accounts to delete");
+                    } catch (DoesNotExistAccount doesNotExistAccount) {
+                        System.out.println("Can't find this account to delete");
+                    }
                 }
             }
             if (!canFind) {

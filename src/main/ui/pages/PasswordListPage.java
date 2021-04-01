@@ -1,5 +1,7 @@
 package ui.pages;
 
+import exceptions.DoesNotExistAccount;
+import exceptions.EmptyAccountListException;
 import model.Account;
 import model.User;
 import ui.PasswordVaultUI;
@@ -151,10 +153,16 @@ public class PasswordListPage extends JPanel {
     // MODIFIES: this
     // EFFECTS: deletes an account from the PasswordListPage
     public void deleteAccount(Account account) {
-        user.removeAccount(account);
-        frame.setPasswordListPage(new PasswordListPage(frame));
-        this.setVisible(false);
-        frame.showPasswordVaultUIPanels();
+        try {
+            user.removeAccount(account);
+            frame.setPasswordListPage(new PasswordListPage(frame));
+            this.setVisible(false);
+            frame.showPasswordVaultUIPanels();
+        } catch (EmptyAccountListException e) {
+            System.out.println("There is no accounts to delete");
+        } catch (DoesNotExistAccount e) {
+            System.out.println("Can't find this account to delete");
+        }
     }
 
 

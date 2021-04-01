@@ -70,6 +70,7 @@ public class LoginScreen implements ActionListener {
 
         JLabel label = new JLabel("Enter login: ");
         label.setFont(PasswordVaultUI.FONT_STYLE);
+        label.setForeground(new Color(62,62,62));
         label.setLabelFor(loginField);
 
         JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
