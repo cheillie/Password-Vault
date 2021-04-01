@@ -7,8 +7,6 @@ vault, allowing easy access to any important information with a simple click. </
 
 **Password Vault functions:**
 - Save & edit your existing passwords, usernames, and email addresses
-- Evaluate the strength of your passwords (future Project Phases)
-- Randomly generate a new password (future Project Phases)
 
 **Who will use Password Vault?** <br>
 Password Vault is suitable for any internet users. As personal information are becoming
@@ -26,12 +24,18 @@ different email addresses I created.
 
 **User Stories**
 - As a user, I want to be able to add a password to my saved list
-- As a user, I want to be able to edit a password that I've already saved
 - As a user, I want to be able to remove a password that I've already saved
-- As a user, I want to be able to click into a saved password to see its details 
-(email address, username, etc.)
-- As a user, I want to be able to save a list of passwords to a user
 - As a user, I want to be able to enter a short 4-digit password to enter the Password
-Vault Application (load the user's saved passwords)
+Vault Application
+- As a user, I want to be able to save and load the data
 
+**Phase 4: Task 2**
+- Chose to make User class robust
+- removeAccount() and setLogin()
 
+**Phase 4: Task 3**
+- LoginScreen, PasswordVault,and PasswordVaultUI all have an association with User,
+JsonReader, and JsonWriter. It would be better if 3 of these classes extended another
+class/abstract class that has the association.
+- I should have made PasswordVaultUI an abstract class with fields User, JsonReader, 
+JsonWriter, then have each of the pages with distinct functionality extend this abstract class.
