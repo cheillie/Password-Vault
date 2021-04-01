@@ -2,6 +2,7 @@ package model;
 
 import exceptions.DoesNotExistAccount;
 import exceptions.EmptyAccountListException;
+import exceptions.InvalidLoginException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -15,13 +16,11 @@ public class User implements Writable {
     private List<Account> accountList;
     private int login;
 
-    // REQUIRES: login is a 4 digit number only
     // EFFECTS: constructs a user with its list of saved accounts and a login password to enter the application
     public User(int login) {
         accountList = new ArrayList<>();
         this.login = login;
     }
-
 
     // EFFECTS: returns the account list
     public List<Account> getAccountList() {
@@ -31,6 +30,14 @@ public class User implements Writable {
     // EFFECTS: returns the login
     public int getLogin() {
         return login;
+    }
+
+    // EFFECTS: sets the login of user
+    public void setLogin(int login) throws InvalidLoginException {
+        if (String.valueOf(login).length() != 4) {
+            throw new InvalidLoginException();
+        }
+        this.login = login;
     }
 
     // MODIFIES: this
@@ -52,7 +59,6 @@ public class User implements Writable {
         accountList.remove(account);
     }
 
-    // REQUIRES: login is a 4 digit number only
     // EFFECTS: checks if the given i is the same as the user login
     public boolean checkLogin(int i) {
         return i == login;

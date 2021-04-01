@@ -2,6 +2,7 @@ package model;
 
 import exceptions.DoesNotExistAccount;
 import exceptions.EmptyAccountListException;
+import exceptions.InvalidLoginException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +18,25 @@ public class UserTest {
         testUser = new User(1234);
         testAccount = new Account("facebook", "123456", "cherry", "cherry@gmail.com");
         testAccount2 = new Account("instagram", "654321", "john", "john@gmail.com");
+    }
+
+    @Test
+    public void testSetLoginNoException() {
+        try {
+            testUser.setLogin(4332);
+        } catch (InvalidLoginException e) {
+            fail("Should not have caught exception");
+        }
+    }
+
+    @Test
+    public void testSetLoginInvalidLoginException() {
+        try {
+            testUser.setLogin(12345);
+            fail("Exception not thrown");
+        } catch (InvalidLoginException e) {
+            // pass
+        }
     }
 
     @Test
