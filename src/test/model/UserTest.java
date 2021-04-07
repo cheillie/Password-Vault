@@ -24,6 +24,7 @@ public class UserTest {
     public void testSetLoginNoException() {
         try {
             testUser.setLogin(4332);
+            // pass
         } catch (InvalidLoginException e) {
             fail("Should not have caught exception");
         }
